@@ -1,9 +1,8 @@
 package com.example.garde.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Gardien {
@@ -16,7 +15,14 @@ public class Gardien {
     private String mail;
     private String typeGardien; //veterinaire ou specialiste en garde animaux
     private String typeAnimaux; // chat ou chien ou les deux
+    private double prixJour;
     private String password;
+
+    @ManyToMany
+    @JoinTable(name = "Client_Gardien",
+            joinColumns = @JoinColumn(name = "id_Client"),
+            inverseJoinColumns = @JoinColumn(name = "id_Gardien"))
+    private List<Client> clients = new ArrayList<>();
 
     public Gardien() {
     }

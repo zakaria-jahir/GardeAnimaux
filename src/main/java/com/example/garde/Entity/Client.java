@@ -1,9 +1,8 @@
 package com.example.garde.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Client {
@@ -15,6 +14,8 @@ public class Client {
     private String teleNum;
     private String mail;
     private String password;
+    @ManyToMany(mappedBy = "clients")
+    private List<Gardien> gardiens = new ArrayList<>();
 
     public Client() {
     }
