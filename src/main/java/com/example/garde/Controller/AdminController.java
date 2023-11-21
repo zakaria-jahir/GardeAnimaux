@@ -24,4 +24,8 @@ public class AdminController {
     public Admin update(@RequestBody Admin admin){
         return service.updateAdmin(admin);
     }
+    @DeleteMapping("/deleteAdmin/{id}")
+    public String delete(@PathVariable int id){
+        return service.deleteAdmin(id);
+    }
 }

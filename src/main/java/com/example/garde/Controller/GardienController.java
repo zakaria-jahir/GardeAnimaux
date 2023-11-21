@@ -25,4 +25,8 @@ public class GardienController {
     public Gardien update(@RequestBody Gardien gardien){
         return service.updateGardien(gardien);
     }
+    @DeleteMapping("/deleteGardien/{id}")
+    public String delete(@PathVariable int id){
+        return service.deleteGardien(id);
+    }
 }

@@ -87,5 +87,22 @@ public class Service {
 
         return reservation.save(existing);
     }
+    public String deleteClinet(int id){
+        client.deleteById(id);
+        return "client removed !!"+id;
+    }
+    public String deleteAdmin(int id){
+        admin.deleteById(id);
+        return "admin removed !!"+id;
+    }
+    public String deleteGardien(int id){
+        gardien.deleteById(id);
+        return "gardien removed !!"+id;
+    }
+    public String deleteReservation(int id){
+        reservation.deleteById(id);
+        return "reservation removed !!"+id;
+    }
+
 
 }
