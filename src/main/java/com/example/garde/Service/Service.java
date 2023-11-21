@@ -48,4 +48,44 @@ public class Service {
     public Reservation reserver(Reservation r){
         return reservation.save(r);
     }
+
+    public Client updateClient(Client c) {
+        Client existing = client.findById(c.getId()).orElse(null);
+        existing.setNom(c.getNom());
+        existing.setPrenom(c.getPrenom());
+        existing.setMail(c.getMail());
+        existing.setTeleNum(c.getTeleNum());
+        existing.setPassword(c.getPassword());
+
+        return client.save(existing);
+    }
+    public Gardien updateGardien(Gardien g) {
+        Gardien existing = gardien.findById(g.getId()).orElse(null);
+        existing.setNom(g.getNom());
+        existing.setPrenom(g.getPrenom());
+        existing.setMail(g.getMail());
+        existing.setTeleNum(g.getTeleNum());
+        existing.setTypeGardien(g.getTypeGardien());
+        existing.setTypeAnimaux(g.getTypeAnimaux());
+        existing.setPassword(g.getPassword());
+
+        return gardien.save(existing);
+    }
+    public Admin updateAdmin(Admin a) {
+        Admin existing = admin.findById(a.getId()).orElse(null);
+        existing.setNom(a.getNom());
+        existing.setPrenom(a.getPrenom());
+        existing.setMail(a.getMail());
+        existing.setPassword(a.getPassword());
+        return admin.save(existing);
+    }
+    public Reservation updateReservation(Reservation r) {
+        Reservation existing = reservation.findById(r.getId()).orElse(null);
+        existing.setDateDebut(r.getDateDebut());
+        existing.setDateFin(r.getDateFin());
+        existing.setTotal(r.getTotal());
+
+        return reservation.save(existing);
+    }
+
 }

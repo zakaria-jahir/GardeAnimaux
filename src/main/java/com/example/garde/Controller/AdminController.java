@@ -3,8 +3,7 @@ package com.example.garde.Controller;
 import com.example.garde.Entity.Admin;
 import com.example.garde.Service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,5 +15,13 @@ public class AdminController {
     @GetMapping("/admins")
     public List<Admin> getAdmins(){
         return service.showAdmins();
+    }
+    @PostMapping("/addAdmin")
+    public Admin add(@RequestBody Admin admin){
+        return service.addAdmin(admin);
+    }
+    @PutMapping("/updateAdmin")
+    public Admin update(@RequestBody Admin admin){
+        return service.updateAdmin(admin);
     }
 }
