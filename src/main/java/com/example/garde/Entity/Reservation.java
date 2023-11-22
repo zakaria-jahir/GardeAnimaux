@@ -2,6 +2,7 @@ package com.example.garde.Entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Entity
 public class Reservation {
@@ -60,8 +61,15 @@ public class Reservation {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setTotal() {
+        if (dateDebut != null && dateFin != null && gardien != null) {
+            long durationInMilliseconds = dateFin.getTime() - dateDebut.getTime();
+            long days = TimeUnit.MILLISECONDS.toDays(durationInMilliseconds);
+            double total = days * gardien.getPrixJour();
+            this.total = total;
+        }
+
+
     }
 
     public Client getClient() {

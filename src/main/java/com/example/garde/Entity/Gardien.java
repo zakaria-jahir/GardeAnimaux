@@ -102,6 +102,22 @@ public class Gardien {
         this.password = password;
     }
 
+    public double getPrixJour() {
+        return prixJour;
+    }
+
+    public void setPrixJour(double prixJour) {
+        this.prixJour = prixJour;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
     @Override
     public String toString() {
         return "Gardien{" +

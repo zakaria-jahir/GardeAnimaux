@@ -23,7 +23,7 @@ public class ReservationController {
         return service.reserver(reservation);
     }
     @PutMapping("/updateReservation")
-    public Reservation update(Reservation reservation){
+    public Reservation update(@RequestBody Reservation reservation){
         return service.updateReservation(reservation);
     }
     @DeleteMapping("/deleteReservation/{id}")

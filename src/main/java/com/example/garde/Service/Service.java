@@ -46,8 +46,10 @@ public class Service {
         return gardien.save(g);
     }
     public Reservation reserver(Reservation r){
+        r.setTotal();
         return reservation.save(r);
     }
+
 
     public Client updateClient(Client c) {
         Client existing = client.findById(c.getId()).orElse(null);
@@ -83,7 +85,7 @@ public class Service {
         Reservation existing = reservation.findById(r.getId()).orElse(null);
         existing.setDateDebut(r.getDateDebut());
         existing.setDateFin(r.getDateFin());
-        existing.setTotal(r.getTotal());
+        existing.setTotal();
 
         return reservation.save(existing);
     }
