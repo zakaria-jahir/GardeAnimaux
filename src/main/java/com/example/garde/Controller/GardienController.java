@@ -13,7 +13,7 @@ public class GardienController {
     @Autowired
     private Service service;
 
-    @GetMapping("/gardines")
+    @GetMapping("/gardiens")
     public List<Gardien> getGardiens(){
         return service.showGardiens();
     }
@@ -28,5 +28,9 @@ public class GardienController {
     @DeleteMapping("/deleteGardien/{id}")
     public String delete(@PathVariable int id){
         return service.deleteGardien(id);
+    }
+    @GetMapping("/gardien/{id}")
+    public Gardien getGardienById(@PathVariable int id){
+        return service.getGardienById(id);
     }
 }

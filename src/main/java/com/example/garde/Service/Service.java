@@ -105,6 +105,17 @@ public class Service {
         reservation.deleteById(id);
         return "reservation removed !!"+id;
     }
-
+    public Client getClientById(int id){
+        return client.findById(id).get();
+    }
+    public Gardien getGardienById(int id){
+        return gardien.findById(id).get();
+    }
+    public Admin getAdminById(int id){
+        return admin.findById(id).get();
+    }
+    public Reservation getReservationById(int id){
+        return reservation.findById(id).get();
+    }
 
 }

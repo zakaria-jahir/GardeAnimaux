@@ -28,4 +28,8 @@ public class AdminController {
     public String delete(@PathVariable int id){
         return service.deleteAdmin(id);
     }
+    @GetMapping("/admin/{id}")
+    public Admin getAdminById(@PathVariable int id){
+        return service.getAdminById(id);
+    }
 }

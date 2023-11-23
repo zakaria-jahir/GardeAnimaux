@@ -30,4 +30,8 @@ public class ClientController {
     public String delete(@PathVariable int id){
         return service.deleteClinet(id);
     }
+    @GetMapping("/client/{id}")
+    public Client getClinetById(@PathVariable int id){
+        return service.getClientById(id);
+    }
 }
