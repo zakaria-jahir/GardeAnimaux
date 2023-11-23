@@ -32,4 +32,8 @@ public class AdminController {
     public Admin getAdminById(@PathVariable int id){
         return service.getAdminById(id);
     }
+    @GetMapping("/adminByNom/{nom}")
+    public List<Admin> getByName(@PathVariable String nom){
+        return service.getAdminByNom(nom);
+    }
 }

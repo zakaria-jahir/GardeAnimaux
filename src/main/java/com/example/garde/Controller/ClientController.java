@@ -34,4 +34,9 @@ public class ClientController {
     public Client getClinetById(@PathVariable int id){
         return service.getClientById(id);
     }
+    @GetMapping("/clientByNom/{nom}")
+    public List<Client> getByName(@PathVariable String nom){
+        return service.getClientByNom(nom);
+    }
+
 }

@@ -8,12 +8,15 @@ import com.example.garde.Repository.AdminRepository;
 import com.example.garde.Repository.ClientRepository;
 import com.example.garde.Repository.GardienRepository;
 import com.example.garde.Repository.ReservationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @org.springframework.stereotype.Service
 public class Service {
+    private final Logger log = LoggerFactory.getLogger(Service.class);
 
     @Autowired
     private ClientRepository client;
@@ -117,5 +120,26 @@ public class Service {
     public Reservation getReservationById(int id){
         return reservation.findById(id).get();
     }
+//    public Client getClientByName(String nom){
+//        return client.findByName(nom);
+//    }
+    public List<Client> getClientByNom(String nom){
+        System.out.println("Searching for clients with nom: " + nom);
+        List<Client> clients = client.findByNom(nom);
+        System.out.println("Found " + clients.size() + " clients with nom: " + nom);
+        return clients;
+    }
+    public List<Admin> getAdminByNom(String nom){
+        System.out.println("searching for admins whith nom: "+nom);
+        List<Admin> admins=admin.findByNom(nom);
+        System.out.println("Found" + admins.size() + "admins with nom "+nom);
+        return admins;
+    }
 
+    public List<Gardien> getGardienByNom(String nom){
+        System.out.println("searching for gardiens whith nom: "+nom);
+        List<Gardien> gardiens=gardien.findByNom(nom);
+        System.out.println("Found" + gardiens.size() + " gardien with nom "+nom);
+        return gardiens;
+    }
 }

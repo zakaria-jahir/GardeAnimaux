@@ -33,4 +33,8 @@ public class GardienController {
     public Gardien getGardienById(@PathVariable int id){
         return service.getGardienById(id);
     }
+    @GetMapping("/gardienByNom/{nom}")
+    public List<Gardien> getByNom(@PathVariable String nom){
+        return service.getGardienByNom(nom);
+    }
 }
