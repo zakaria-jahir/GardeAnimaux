@@ -9,4 +9,6 @@ public interface GardienRepository extends JpaRepository<Gardien,Integer> {
     List<Gardien> findByNom(String nom);
 
     List<Gardien> findByTypeGardien(String type);
+
+    List<Gardien> findByTypeAnimaux(String type);
 }

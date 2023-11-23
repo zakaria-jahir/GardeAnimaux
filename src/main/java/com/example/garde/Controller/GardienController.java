@@ -41,4 +41,8 @@ public class GardienController {
     public List<Gardien> getByTypeGardien(@PathVariable String type){
         return service.getGardienByTypeGardien(type);
     }
+    @GetMapping("/gardienByTypeAnimaux/{type}")
+    public List<Gardien> getByTypeAnimaux(@PathVariable String type){
+        return service.getGardienByTypeAnimaux(type);
+    }
 }

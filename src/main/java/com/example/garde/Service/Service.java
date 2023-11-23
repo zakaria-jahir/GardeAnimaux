@@ -146,4 +146,10 @@ public class Service {
         System.out.println("Found" + gardiens.size() + " gardien with type "+type);
         return gardiens;
     }
+    public List<Gardien> getGardienByTypeAnimaux(String type){
+        System.out.println("searching for gardiens whith type animaux: "+type);
+        List<Gardien> gardiens=gardien.findByTypeAnimaux(type);
+        System.out.println("Found" + gardiens.size() + " gardien with type "+type);
+        return gardiens;
+    }
 }
