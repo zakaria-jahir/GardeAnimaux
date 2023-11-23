@@ -45,4 +45,9 @@ public class GardienController {
     public List<Gardien> getByTypeAnimaux(@PathVariable String type){
         return service.getGardienByTypeAnimaux(type);
     }
+    @GetMapping("/gardienByPrice/{minValue}/{maxValue}")
+    public List<Gardien> getByPrice(@PathVariable(name = "minValue") double minValue,
+                                    @PathVariable(name = "maxValue") double maxValue){
+        return service.getGardiensByPriceRange(minValue,maxValue);
+    }
 }

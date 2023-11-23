@@ -152,4 +152,10 @@ public class Service {
         System.out.println("Found" + gardiens.size() + " gardien with type "+type);
         return gardiens;
     }
+    public List<Gardien> getGardiensByPriceRange(double minValue,double maxValue) {
+        System.out.println("Searching for gardiens with price between "+minValue+" and "+maxValue);
+        List<Gardien> gardiens=gardien.findGardiensByPrixJourBetween(minValue,maxValue);
+        System.out.println("Found" + gardiens.size());
+        return gardiens;
+    }
 }
