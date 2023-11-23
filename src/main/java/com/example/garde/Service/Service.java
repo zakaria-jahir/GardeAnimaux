@@ -120,9 +120,7 @@ public class Service {
     public Reservation getReservationById(int id){
         return reservation.findById(id).get();
     }
-//    public Client getClientByName(String nom){
-//        return client.findByName(nom);
-//    }
+
     public List<Client> getClientByNom(String nom){
         System.out.println("Searching for clients with nom: " + nom);
         List<Client> clients = client.findByNom(nom);
@@ -140,6 +138,12 @@ public class Service {
         System.out.println("searching for gardiens whith nom: "+nom);
         List<Gardien> gardiens=gardien.findByNom(nom);
         System.out.println("Found" + gardiens.size() + " gardien with nom "+nom);
+        return gardiens;
+    }
+    public List<Gardien> getGardienByTypeGardien(String type){
+        System.out.println("searching for gardiens whith type gardien: "+type);
+        List<Gardien> gardiens=gardien.findByTypeGardien(type);
+        System.out.println("Found" + gardiens.size() + " gardien with type "+type);
         return gardiens;
     }
 }

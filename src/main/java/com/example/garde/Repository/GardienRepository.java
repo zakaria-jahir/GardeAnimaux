@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface GardienRepository extends JpaRepository<Gardien,Integer> {
     List<Gardien> findByNom(String nom);
+
+    List<Gardien> findByTypeGardien(String type);
 }

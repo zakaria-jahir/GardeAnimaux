@@ -37,4 +37,8 @@ public class GardienController {
     public List<Gardien> getByNom(@PathVariable String nom){
         return service.getGardienByNom(nom);
     }
+    @GetMapping("/gardienByTypeGardien/{type}")
+    public List<Gardien> getByTypeGardien(@PathVariable String type){
+        return service.getGardienByTypeGardien(type);
+    }
 }
