@@ -4,6 +4,8 @@ package com.example.garde.Controller;
 import com.example.garde.Entity.Gardien;
 import com.example.garde.Service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +51,13 @@ public class GardienController {
     public List<Gardien> getByPriceRange( @RequestParam(name = "minValue", required = false, defaultValue = "0") double minValue,
                                           @RequestParam(name = "maxValue", required = false, defaultValue = "1000000") double maxValue){
         return service.getGardiensByPriceRange(minValue,maxValue);
+    }
+    @PostMapping("/gardien/login")
+    public ResponseEntity<?> login(@RequestBody Gardien gardien) {
+        if (service.auth(gardien) != null) {
+            return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Invalid credentials\"}");
     }
 
 }

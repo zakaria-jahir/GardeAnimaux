@@ -1,8 +1,11 @@
 package com.example.garde.Controller;
 
 import com.example.garde.Entity.Admin;
+import com.example.garde.Entity.Client;
 import com.example.garde.Service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +38,13 @@ public class AdminController {
     @GetMapping("/adminByNom/{nom}")
     public List<Admin> getByName(@PathVariable String nom){
         return service.getAdminByNom(nom);
+    }
+
+    @PostMapping("/admin/login")
+    public ResponseEntity<?> login(@RequestBody Admin admin) {
+        if (service.auth(admin) != null) {
+            return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Invalid credentials\"}");
     }
 }

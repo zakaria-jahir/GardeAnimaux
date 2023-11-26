@@ -1,9 +1,6 @@
 package com.example.garde.Service;
 
-import com.example.garde.Entity.Admin;
-import com.example.garde.Entity.Client;
-import com.example.garde.Entity.Gardien;
-import com.example.garde.Entity.Reservation;
+import com.example.garde.Entity.*;
 import com.example.garde.Repository.AdminRepository;
 import com.example.garde.Repository.ClientRepository;
 import com.example.garde.Repository.GardienRepository;
@@ -158,4 +155,99 @@ public class Service {
         System.out.println("Found" + gardiens.size());
         return gardiens;
     }
+    public Admin findAdminByMail(String mail) {
+        return admin.findByMail(mail);
+    }
+    public Client findClientByMail(String mail) {
+        return client.findByMail(mail);
+    }
+    public Gardien findGardienByMail(String mail) {
+        return gardien.findByMail(mail);
+    }
+
+
+//    public <T> T log(T user) {
+//        try {
+//            System.out.println("Processing user: " + user);
+//
+//            if (user instanceof Client) {
+//                System.out.println("User is an instance of Client");
+//                Client client1 = (Client) user;
+//                Client clientDao = client.findByMail(client1.getMail());
+//                System.out.println("Client found: " + clientDao);
+//
+//                if (clientDao != null && clientDao.getPassword().equals(client1.getPassword())) {
+//                    System.out.println("Client login successful");
+//                    return (T) clientDao;
+//                }
+//            } else if (user instanceof Admin) {
+//                System.out.println("User is an instance of Admin");
+//                Admin admin1 = (Admin) user;
+//                Admin adminDao = admin.findByMail(admin1.getMail());
+//                System.out.println("Admin found: " + adminDao);
+//
+//                if (adminDao != null && adminDao.getPassword().equals(admin1.getPassword())) {
+//                    System.out.println("Admin login successful");
+//                    return (T) adminDao;
+//                }
+//            } else if (user instanceof Gardien) {
+//                System.out.println("User is an instance of Gardien");
+//                Gardien gardien1 = (Gardien) user;
+//                Gardien gardienDao = gardien.findByMail(gardien1.getMail());
+//                System.out.println("Gardien found: " + gardienDao);
+//
+//                if (gardienDao != null && gardienDao.getPassword().equals(gardien1.getPassword())) {
+//                    System.out.println("Gardien login successful");
+//                    return (T) gardienDao;
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Exception: " + e.getMessage());
+//            e.printStackTrace();  // Print the full stack trace for debugging
+//        }
+//
+//        System.out.println("Invalid credentials");
+//
+//        return null;
+//    }
+
+
+    public Client auth(Client c){
+        Client clientDao = client.findByMail(c.getMail());
+        try {
+            if(clientDao != null && clientDao.getPassword().equals(c.getPassword())){
+                System.out.println(clientDao);
+                return clientDao;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Admin auth(Admin a){
+        Admin adminDao = admin.findByMail(a.getMail());
+        try {
+            if(adminDao !=null && adminDao.getPassword().equals(a.getPassword())){
+                System.out.println(adminDao);
+                return adminDao;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public Gardien auth(Gardien g){
+        Gardien gardienDao = gardien.findByMail(g.getMail());
+        try {
+            if(gardienDao !=null && gardienDao.getPassword().equals(g.getPassword())){
+                System.out.println(gardienDao);
+                return gardienDao;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
 }

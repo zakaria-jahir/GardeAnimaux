@@ -11,5 +11,7 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client, Integer> {
     @Query(value = "SELECT * FROM client WHERE nom = :nom", nativeQuery = true)
     List<Client> findByNom(@Param("nom") String nom);
+    Client findByMail(String mail);
+
 
 }
