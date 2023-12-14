@@ -8,6 +8,8 @@ import com.example.garde.Repository.ReservationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -45,14 +47,62 @@ public class Service {
     public Gardien addGardien(Gardien g){
         return gardien.save(g);
     }
+
+    @Transactional
     public Reservation reserver(Reservation r){
-        r.setTotal();
-        return reservation.save(r);
+        try {
+            log.info("Reserving: " + r.toString());
+            // Ensure that the Client and Gardien associations are set
+            if (r.getClient() == null || r.getGardien() == null) {
+                log.error("Client or Gardien is null in the Reservation entity.");
+                // You can throw an exception or return an error response
+                return null;
+            }
+            r.setTotal();
+            Reservation savedReservation = reservation.save(r);
+
+            // Fetch associated Client and Gardien manually
+            Client fetchedClient = client.findById(savedReservation.getClient().getId()).orElse(null);
+            Gardien fetchedGardien = gardien.findById(savedReservation.getGardien().getId()).orElse(null);
+
+            // Check if the fetched Client and Gardien are not null before setting them back
+            if (fetchedClient != null) {
+                savedReservation.setClient(fetchedClient);
+            } else {
+                log.error("Client not found for the reservation with ID: " + savedReservation.getId());
+                // Handle the case where the associated Client is not found
+                // You can throw an exception or return an error response
+                return null;
+            }
+
+            if (fetchedGardien != null) {
+                savedReservation.setGardien(fetchedGardien);
+            } else {
+                log.error("Gardien not found for the reservation with ID: " + savedReservation.getId());
+                // Handle the case where the associated Gardien is not found
+                // You can throw an exception or return an error response
+                return null;
+            }
+
+            return savedReservation;
+        } catch (Exception e) {
+            // Log the exception
+            log.error("Error occurred during reservation", e);
+            // You can throw an exception or return an error response
+            return null;
+        }
+
     }
 
 
+    @Transactional
     public Client updateClient(Client c) {
         Client existing = client.findById(c.getId()).orElse(null);
+        if (existing == null) {
+            // You can throw an exception or return null as needed
+            return null;
+        }
+
         existing.setNom(c.getNom());
         existing.setPrenom(c.getPrenom());
         existing.setMail(c.getMail());
@@ -83,6 +133,12 @@ public class Service {
     }
     public Reservation updateReservation(Reservation r) {
         Reservation existing = reservation.findById(r.getId()).orElse(null);
+        existing.setNomFacture(r.getNomFacture());
+        existing.setPrenomFacture(r.getPrenomFacture());
+        existing.setMailFacture(r.getMailFacture());
+        existing.setAdresseFacture(r.getAdresseFacture());
+        existing.setNomAnimal(r.getNomAnimal());
+        existing.setTypeAnimal(r.getTypeAnimal());
         existing.setDateDebut(r.getDateDebut());
         existing.setDateFin(r.getDateFin());
         existing.setTotal();
@@ -249,5 +305,13 @@ public class Service {
         }
         return null;
     }
+    public List<Reservation> getClientReservations(int clientId) {
+        return reservation.findByClientId(clientId);
+    }
+
+    public List<Reservation> getgardienReservations(int gardienId) {
+        return reservation.findByGardienId(gardienId);
+    }
+
 
 }

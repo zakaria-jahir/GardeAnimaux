@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class GardienController {
     @Autowired
@@ -54,10 +55,15 @@ public class GardienController {
     }
     @PostMapping("/gardien/login")
     public ResponseEntity<?> login(@RequestBody Gardien gardien) {
-        if (service.auth(gardien) != null) {
-            return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+        Gardien authenticatedGardien = service.auth(gardien);
+
+        if (authenticatedGardien != null) {
+            // Return gardien details, including the id, upon successful login
+            return ResponseEntity.ok(authenticatedGardien);
         }
+
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Invalid credentials\"}");
+
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class AdminController {
     @Autowired
@@ -42,8 +43,11 @@ public class AdminController {
 
     @PostMapping("/admin/login")
     public ResponseEntity<?> login(@RequestBody Admin admin) {
-        if (service.auth(admin) != null) {
-            return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+        Admin authenticatedAdmin = service.auth(admin);
+
+        if (authenticatedAdmin != null) {
+            // Return client details, including the id, upon successful login
+            return ResponseEntity.ok(authenticatedAdmin);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Invalid credentials\"}");
     }

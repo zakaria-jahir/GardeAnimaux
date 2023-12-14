@@ -9,29 +9,42 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String nomFacture;
+    private String prenomFacture;
+    private String mailFacture;
+    private String adresseFacture;
+    private String nomAnimal;
+    private String typeAnimal;
     private Date dateDebut;
     private Date dateFin;
     private double total;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_Client")
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_Gardien")
     private Gardien gardien;
 
     public Reservation() {
     }
 
-    public Reservation(int id, Date dateDebut, Date dateFin, double total, Client client, Gardien gardien) {
+    public Reservation(int id, String nomFacture, String prenomFacture, String mailFacture, String adresseFacture, String nomAnimal, String typeAnimal, Date dateDebut, Date dateFin, double total, Client client, Gardien gardien) {
         this.id = id;
+        this.nomFacture = nomFacture;
+        this.prenomFacture = prenomFacture;
+        this.mailFacture = mailFacture;
+        this.adresseFacture = adresseFacture;
+        this.nomAnimal = nomAnimal;
+        this.typeAnimal = typeAnimal;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.total = total;
         this.client = client;
         this.gardien = gardien;
     }
+
 
     public int getId() {
         return id;
@@ -72,6 +85,54 @@ public class Reservation {
 
     }
 
+    public String getNomFacture() {
+        return nomFacture;
+    }
+
+    public void setNomFacture(String nomFacture) {
+        this.nomFacture = nomFacture;
+    }
+
+    public String getPrenomFacture() {
+        return prenomFacture;
+    }
+
+    public void setPrenomFacture(String prenomFacture) {
+        this.prenomFacture = prenomFacture;
+    }
+
+    public String getMailFacture() {
+        return mailFacture;
+    }
+
+    public void setMailFacture(String mailFacture) {
+        this.mailFacture = mailFacture;
+    }
+
+    public String getAdresseFacture() {
+        return adresseFacture;
+    }
+
+    public void setAdresseFacture(String adresseFacture) {
+        this.adresseFacture = adresseFacture;
+    }
+
+    public String getNomAnimal() {
+        return nomAnimal;
+    }
+
+    public void setNomAnimal(String nomAnimal) {
+        this.nomAnimal = nomAnimal;
+    }
+
+    public String getTypeAnimal() {
+        return typeAnimal;
+    }
+
+    public void setTypeAnimal(String typeAnimal) {
+        this.typeAnimal = typeAnimal;
+    }
+
     public Client getClient() {
         return client;
     }
@@ -92,6 +153,12 @@ public class Reservation {
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
+                ", nomFacture='" + nomFacture + '\'' +
+                ", prenomFacture='" + prenomFacture + '\'' +
+                ", mailFacture='" + mailFacture + '\'' +
+                ", adresseFacture='" + adresseFacture + '\'' +
+                ", nomAnimal='" + nomAnimal + '\'' +
+                ", typeAnimal='" + typeAnimal + '\'' +
                 ", dateDebut=" + dateDebut +
                 ", dateFin=" + dateFin +
                 ", total=" + total +
